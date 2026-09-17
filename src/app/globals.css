@@ -24,6 +24,12 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
     --radius: 0.5rem;
+
+    /* Portfolio accent palette */
+    --accent-teal: 168 80% 40%;
+    --accent-cyan: 190 95% 43%;
+    --accent-amber: 38 92% 60%;
+    --accent-rose: 350 80% 55%;
   }
 }
 
@@ -34,6 +40,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-inter), var(--font-geist-sans), system-ui, sans-serif;
   }
 }
 
@@ -42,4 +49,229 @@
   object-fit: cover;
   width: 100%;
   height: 100vh;
+}
+
+/* ─── Case Study Card Styles ─── */
+
+.case-card {
+  position: relative;
+  background: rgba(24, 24, 27, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.case-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+  transition: width 0.3s ease;
+}
+
+.case-card:hover::before {
+  width: 4px;
+}
+
+.case-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 40px rgba(20, 184, 166, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.case-card[data-category="billing"]::before {
+  background: linear-gradient(to bottom, hsl(var(--accent-teal)), hsl(var(--accent-cyan)));
+}
+.case-card[data-category="clinical"]::before {
+  background: linear-gradient(to bottom, hsl(var(--accent-rose)), hsl(var(--accent-amber)));
+}
+.case-card[data-category="ux"]::before {
+  background: linear-gradient(to bottom, hsl(var(--accent-cyan)), hsl(168, 60%, 60%));
+}
+
+/* Number badge */
+.case-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  font-family: var(--font-geist-mono), monospace;
+  flex-shrink: 0;
+}
+
+.case-card[data-category="billing"] .case-number {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(6, 182, 212, 0.15));
+  color: hsl(var(--accent-teal));
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+.case-card[data-category="clinical"] .case-number {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.12));
+  color: hsl(var(--accent-amber));
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.case-card[data-category="ux"] .case-number {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(20, 184, 166, 0.1));
+  color: hsl(var(--accent-cyan));
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* Category tag */
+.case-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-card[data-category="billing"] .case-tag {
+  background: rgba(20, 184, 166, 0.1);
+  color: hsl(168, 70%, 55%);
+  border: 1px solid rgba(20, 184, 166, 0.15);
+}
+.case-card[data-category="clinical"] .case-tag {
+  background: rgba(245, 158, 11, 0.1);
+  color: hsl(38, 90%, 65%);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+}
+.case-card[data-category="ux"] .case-tag {
+  background: rgba(6, 182, 212, 0.1);
+  color: hsl(190, 80%, 60%);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+/* Impact badge */
+.impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.impact-badge.high {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.impact-badge.critical {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.impact-badge.medium {
+  background: rgba(6, 182, 212, 0.1);
+  color: #22d3ee;
+  border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+/* Story step labels */
+.step-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ─── Section Dividers ─── */
+
+.section-glow {
+  position: relative;
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 600px;
+  height: 1px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(20, 184, 166, 0.3) 0%,
+    transparent 70%
+  );
+}
+
+/* ─── Subtle Grid Background ─── */
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Custom Scrollbar ─── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Skill Chip ─── */
+
+.skill-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1.25rem;
+  background: rgba(24, 24, 27, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.skill-chip:hover {
+  background: rgba(24, 24, 27, 0.6);
+  border-color: rgba(20, 184, 166, 0.15);
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.05);
+  transform: translateY(-1px);
+}
+
+.skill-chip .skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: rgba(20, 184, 166, 0.08);
+  color: hsl(168, 70%, 55%);
+  flex-shrink: 0;
 }

@@ -21,6 +21,7 @@ export default function ScrollyCanvas({ children }: { children?: ReactNode }) {
   });
 
   // Preload images
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
@@ -78,6 +79,7 @@ export default function ScrollyCanvas({ children }: { children?: ReactNode }) {
     drawFrame(Math.floor(latest));
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleResize = () => drawFrame(Math.floor(frameIndex.get()));
     window.addEventListener("resize", handleResize);
